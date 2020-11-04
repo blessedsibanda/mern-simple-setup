@@ -21,10 +21,7 @@ const getErrorMessage = (err) => {
 const getUniqueErrorMessage = (err) => {
   let output;
   try {
-    let fieldName = err.message.substring(
-      err.message.lastIndexOf('.$') + 2,
-      err.message.lastIndexOf('_1'),
-    );
+    let fieldName = Object.keys(err.keyPattern)[0];
     output =
       fieldName.charAt(0).toUpperCase() +
       fieldName.slice(1) +

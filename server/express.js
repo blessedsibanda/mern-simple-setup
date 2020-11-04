@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
+import userRoutes from './routes/user.routes';
 import template from './../template';
 
 const CURRENT_WORKING_DIR = process.cwd();
@@ -18,6 +19,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
+app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).send(template());
