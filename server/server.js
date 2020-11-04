@@ -1,14 +1,17 @@
-import { MongoClient } from 'mongodb';
+import mongoose, { mongo } from 'mongoose';
 import devBundle from './devBundle'; // comment out this in production
 import app from './express';
 import config from '../config/config';
 
-const url =
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup';
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
-MongoClient.connect(url, (err, db) => {
-  console.log('Connected successfully to mongodb server');
-  db.close();
+mongoose.connection.on('error', () => {
+  throw new Error(`unable to connect to database: ${config.mongoUri}`);
 });
 
 devBundle.compile(app); // comment out this in production
