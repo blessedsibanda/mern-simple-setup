@@ -4,7 +4,10 @@
   "description": "",
   "main": "template.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "nodemon",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "start": "NODE_ENV=production node ./dist/server.generated.js"
   },
   "keywords": [
     "node.js",
@@ -25,6 +28,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.1.0",
     "nodemon": "^2.0.6",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.1.0",
