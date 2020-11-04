@@ -1,10 +1,18 @@
 import express from 'express';
 import path from 'path';
+import { MongoClient } from 'mongodb';
 import template from './../template';
+import devBundle from './devBundle'; // comment out this in production
 
 const CURRENT_WORKING_DIR = process.cwd();
 
-import devBundle from './devBundle'; // comment out this in production
+const url =
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup';
+
+MongoClient.connect(url, (err, db) => {
+  console.log('Connected successfully to mongodb server');
+  db.close();
+});
 
 const app = express();
 
